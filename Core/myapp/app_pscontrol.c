@@ -27,15 +27,12 @@ int CarSpeedControl = 30;
 * @retval        void
 * @par History   无
 */
-void app_ps2_deal(void)
+uint8_t app_ps2_deal(void)
 {
     uint8_t PS2_KEY = 0, X1=0,Y1=0,X2=0,Y2=0;
-
-
     __set_PRIMASK(1);  //关中断；
     PS2_KEY = PS2_DataKey();	 //手柄按键捕获处理
     __set_PRIMASK(0);//开中断
-
     switch(PS2_KEY)
     {
         case PSB_SELECT: 	printf("PSB_SELECT \n");  break;
@@ -128,6 +125,7 @@ void app_ps2_deal(void)
             g_CarState = enSTOP;
         }
     }
+    return PS2_KEY;
 }
 
 //void app_CarstateOutput(void)

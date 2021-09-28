@@ -4,6 +4,7 @@
 void oled_distance();
 void oled_speed();
 void oled_key();
+void oled_display();
 void oled_init(void);
 extern u8g2_t u8g2;
 #endif

@@ -36,9 +36,7 @@ void Fun_STA1()
 //    Car_Stop();
     if (1)
     {
-        oled_distance();
-        oled_speed();
-        oled_key();
+        oled_display();
         //×´Ì¬»úÇÐ»»ÖÁ×´Ì¬2
 //        STA_Machine.ucSTA_Machine_Status = STA2;
     }

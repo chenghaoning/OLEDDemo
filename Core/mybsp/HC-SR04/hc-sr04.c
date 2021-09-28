@@ -23,7 +23,6 @@ void Hcsr04Init(TIM_HandleTypeDef *htim, uint32_t Channel)
     // MX_TIM2_Init();  // cubemx中配置
     Hcsr04Info.prescaler = htim->Init.Prescaler; //  72-1
     Hcsr04Info.period = htim->Init.Period;       //  65535
-
     Hcsr04Info.instance = htim->Instance;        //  TIM2
     Hcsr04Info.ic_tim_ch = Channel;
     if(Hcsr04Info.ic_tim_ch == TIM_CHANNEL_1)

@@ -30,7 +30,8 @@ static void Peripheral_Set()
     u8g2Init(&u8g2);
     oled_init();
     Hcsr04Init(&htim2,TIM_CHANNEL_1);
-//    PS2_SetInit();
+    Hcsr04Start();
+    PS2_SetInit();
 }
 
 /********************************************************
