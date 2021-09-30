@@ -21,6 +21,6 @@ void app_CarstateOutput(void);
 
 extern int g_CarState; //  1前2后3左4右0停止
 extern int CarSpeedControl;
-#define LCarSpeed   20
-#define RCarSpeed   20
+#define LCarSpeed   100
+#define RCarSpeed   100
 #endif

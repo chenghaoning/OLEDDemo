@@ -33,10 +33,16 @@ STA_Machine_t   STA_Machine =
 */
 void Fun_STA1()
 {
-//    Car_Stop();
     if (1)
     {
+
+        Speed_FR=3000;
+        Speed_BR=4000;
+        Speed_BL=3044;
+        Speed_BR=4000;
         oled_display();
+        app_CarstateOutput();
+//        Car_Run(100);
         //×´Ì¬»úÇÐ»»ÖÁ×´Ì¬2
 //        STA_Machine.ucSTA_Machine_Status = STA2;
     }
@@ -44,38 +50,47 @@ void Fun_STA1()
 
 void Fun_STA2()
 {
-//    Car_Stop();
-//    if (Hcsr04Read() < 10) {
-//        Car_Stop();
-//        HAL_Delay(50);
-//        Car_Back(CarSpeedControl);
-//        HAL_Delay(1000);
-//        Car_Stop();
-//        STA_Machine.ucSTA_Machine_Status = STA3;
-//    }
-//    else { Car_Run(CarSpeedControl); }
-//    oled_distance();
-//    oled_speed();
+    Car_Stop();
+    if (Hcsr04Read() < 10)
+    {
+        HAL_Delay(10);
+        if (Hcsr04Read() < 10)
+        {
+            Car_Stop();
+            HAL_Delay(50);
+            Car_Back(CarSpeedControl);
+            HAL_Delay(1000);
+            Car_Stop();
+            STA_Machine.ucSTA_Machine_Status = STA3;
+        }
+    }
+    else { Car_Run(CarSpeedControl); }
+    oled_display();
 }
 
 void Fun_STA3()
 {
-//    Car_Stop();
-//    Car_SpinLeft(LCarSpeed,RCarSpeed);
-//    HAL_Delay(1000);
-//    Car_Stop();
-//    if (Hcsr04Read() < 20) {
-//        Fun_STA3();
-//    }
-//    else{STA_Machine.ucSTA_Machine_Status = STA1;}
+    Car_Stop();
+    Car_SpinLeft(LCarSpeed,RCarSpeed);
+    HAL_Delay(500);
+    Car_Stop();
+    if (Hcsr04Read() < 20)
+    {
+        HAL_Delay(10);
+        if (Hcsr04Read() < 20)
+        {
+            Fun_STA3();
+        }
+    }
+    else{STA_Machine.ucSTA_Machine_Status = STA1;}
 }
 
 void Fun_STA4()
 {
+    Car_Stop();
     app_ps2_deal();
-//    app_CarstateOutput();
-    oled_distance();
-    oled_speed();
+    app_CarstateOutput();
+    oled_display();
 	//×´Ì¬»úÇÐ»»ÖÁ×´Ì¬5
 //	STA_Machine.ucSTA_Machine_Status = STA1;
 }
@@ -83,7 +98,7 @@ void Fun_STA4()
 void Fun_STA5()
 {
 
-    oled_key();
+
     HAL_Delay(100);
 	//×´Ì¬»úÇÐ»»ÖÁ³õÊ¼×´Ì¬1
 //	STA_Machine.ucSTA_Machine_Status = STA1;

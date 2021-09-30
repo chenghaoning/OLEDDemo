@@ -15,7 +15,7 @@
 #include "MyApplication.h"
 
 int g_CarState = enSTOP; //  1前2后3左4右0停止
-int CarSpeedControl = 30;
+int CarSpeedControl = 100;
 
 /**
 * Function       app_ps2_deal
@@ -57,15 +57,15 @@ uint8_t app_ps2_deal(void)
         case PSB_R2:
         {
             CarSpeedControl -= 100;
-            if (CarSpeedControl < 30)
+            if (CarSpeedControl < 100)
             {
-                CarSpeedControl = 30;
+                CarSpeedControl = 100;
             }
             printf("PSB_R2 \n");
 
         }  break;
-        case PSB_L1:      	printf("PSB_L1 \n");  break;
-        case PSB_R1:      	printf("PSB_R1 \n");  break;
+        case PSB_L1:     STA_Machine.ucSTA_Machine_Status = STA2; 	printf("PSB_L1 \n");  break;
+        case PSB_R1:     STA_Machine.ucSTA_Machine_Status = STA1; 	printf("PSB_R1 \n");  break;
         case PSB_TRIANGLE:	printf("PSB_TRIANGLE \n"); break; 							//灭火
         case PSB_CIRCLE:  	g_CarState = enRIGHT; printf("PSB_CIRCLE \n");  break;  	//舵机转
         case PSB_CROSS:     printf("PSB_CROSS \n");  break; 					//鸣笛
@@ -128,24 +128,24 @@ uint8_t app_ps2_deal(void)
     return PS2_KEY;
 }
 
-//void app_CarstateOutput(void)
-//{
-////根据小车状态做相应的动作
-//    switch (g_CarState)
-//    {
-//        case enSTOP: Car_Stop(); break;
-//        case enRUN: Car_Run(CarSpeedControl); break;
-//        case enLEFT: Car_Left(CarSpeedControl); break;
-//        case enRIGHT: Car_Right(CarSpeedControl); break;
-//        case enBACK: Car_Back(CarSpeedControl); break;
-//        case enTLEFT: Car_SpinLeft(CarSpeedControl, CarSpeedControl); break;
-//        case enTRIGHT: Car_SpinRight(CarSpeedControl, CarSpeedControl); break;
-//
-//        case enUPLEFT:break;//左上转
-//        case enDOWNLEFT:break;//左下转
-//        case enUPRIGHT:break;//右上转
-//        case enDOWNRIGHT:break;//右下转
-//        default: Car_Stop(); break;
-//    }
-//
-//}
+void app_CarstateOutput(void)
+{
+//根据小车状态做相应的动作
+    switch (g_CarState)
+    {
+        case enSTOP: Car_Stop(); break;
+        case enRUN: Car_Run(CarSpeedControl); break;
+        case enLEFT: Car_Left(CarSpeedControl); break;
+        case enRIGHT: Car_Right(CarSpeedControl); break;
+        case enBACK: Car_Back(CarSpeedControl); break;
+        case enTLEFT: Car_SpinLeft(CarSpeedControl, CarSpeedControl); break;
+        case enTRIGHT: Car_SpinRight(CarSpeedControl, CarSpeedControl); break;
+
+        case enUPLEFT:break;//左上转
+        case enDOWNLEFT:break;//左下转
+        case enUPRIGHT:break;//右上转
+        case enDOWNRIGHT:break;//右下转
+        default: Car_Stop(); break;
+    }
+
+}
