@@ -41,10 +41,10 @@ float PID_Compute_TIM3(float Setpoint3, float ADC_Buf3);
 float PID_Compute_TIM4(float Setpoint4, float ADC_Buf4);
 float PID_Compute_TIM5(float Setpoint5, float ADC_Buf5);
 
-void Get_TIM1_Speed(void);
-void Get_TIM3_Speed(void);
-void Get_TIM4_Speed(void);
-void Get_TIM5_Speed(void);
+uint8_t Get_TIM1_Speed(void);
+uint8_t Get_TIM3_Speed(void);
+uint8_t Get_TIM4_Speed(void);
+uint8_t Get_TIM5_Speed(void);
 
 void speed_read_TimIcIsr(TIM_HandleTypeDef *htim);
 #endif

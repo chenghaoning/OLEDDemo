@@ -10,11 +10,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
     {
         Hcsr04TimOverflowIsr(&htim);
     }
-//
-//    if (htim == (&htim6))
-//    {
-//        speed_read_TimIcIsr(&htim);
-//    }
+
+    if (htim == (&htim6))
+    {
+        speed_read_TimIcIsr(&htim);
+    }
 }
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {

@@ -128,24 +128,24 @@ uint8_t app_ps2_deal(void)
     return PS2_KEY;
 }
 
-//void app_CarstateOutput(void)
-//{
-////根据小车状态做相应的动作
-//    switch (g_CarState)
-//    {
-//        case enSTOP: Car_Stop(); break;
-//        case enRUN: Car_Run(CarSpeedControl); break;
-//        case enLEFT: Car_Left(CarSpeedControl); break;
-//        case enRIGHT: Car_Right(CarSpeedControl); break;
-//        case enBACK: Car_Back(CarSpeedControl); break;
-//        case enTLEFT: Car_SpinLeft(CarSpeedControl, CarSpeedControl); break;
-//        case enTRIGHT: Car_SpinRight(CarSpeedControl, CarSpeedControl); break;
-//
-//        case enUPLEFT:break;//左上转
-//        case enDOWNLEFT:break;//左下转
-//        case enUPRIGHT:break;//右上转
-//        case enDOWNRIGHT:break;//右下转
-//        default: Car_Stop(); break;
-//    }
-//
-//}
+void app_CarstateOutput(void)
+{
+//根据小车状态做相应的动作
+    switch (g_CarState)
+    {
+        case enSTOP: Car_Stop(); break;
+        case enRUN: Car_Run(CarSpeedControl); break;
+        case enLEFT: Car_Left(CarSpeedControl); break;
+        case enRIGHT: Car_Right(CarSpeedControl); break;
+        case enBACK: Car_Back(CarSpeedControl); break;
+        case enTLEFT: Car_SpinLeft(CarSpeedControl, CarSpeedControl); break;
+        case enTRIGHT: Car_SpinRight(CarSpeedControl, CarSpeedControl); break;
+
+        case enUPLEFT:break;//左上转
+        case enDOWNLEFT:break;//左下转
+        case enUPRIGHT:break;//右上转
+        case enDOWNRIGHT:break;//右下转
+        default: Car_Stop(); break;
+    }
+
+}

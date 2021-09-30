@@ -33,10 +33,15 @@ STA_Machine_t   STA_Machine =
 */
 void Fun_STA1()
 {
-//    Car_Stop();
     if (1)
     {
-        oled_display();
+
+        Speed_FR=3000;
+        Speed_BR=4000;
+        Speed_BL=3044;
+        Speed_BR=4000;
+//        oled_display();
+//        Car_Run(100);
         //×´Ì¬»úÇÐ»»ÖÁ×´Ì¬2
 //        STA_Machine.ucSTA_Machine_Status = STA2;
     }
@@ -54,8 +59,7 @@ void Fun_STA2()
 //        STA_Machine.ucSTA_Machine_Status = STA3;
 //    }
 //    else { Car_Run(CarSpeedControl); }
-//    oled_distance();
-//    oled_speed();
+//    oled_display();
 }
 
 void Fun_STA3()
@@ -72,10 +76,11 @@ void Fun_STA3()
 
 void Fun_STA4()
 {
-    app_ps2_deal();
+//    Car_Stop();
+//    app_ps2_deal();
 //    app_CarstateOutput();
-    oled_distance();
-    oled_speed();
+    oled_display();
+    Speed_FL=30;
 	//×´Ì¬»úÇÐ»»ÖÁ×´Ì¬5
 //	STA_Machine.ucSTA_Machine_Status = STA1;
 }
@@ -83,7 +88,7 @@ void Fun_STA4()
 void Fun_STA5()
 {
 
-    oled_key();
+
     HAL_Delay(100);
 	//×´Ì¬»úÇÐ»»ÖÁ³õÊ¼×´Ì¬1
 //	STA_Machine.ucSTA_Machine_Status = STA1;

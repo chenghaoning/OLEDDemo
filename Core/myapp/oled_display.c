@@ -7,32 +7,6 @@ void oled_init(void )
     u8g2_ClearBuffer(&u8g2);
 }
 
-void oled_distance()
-{
-    char distance[6];
-    Hcsr04Start();
-    HAL_Delay(200);
-    sprintf(distance,":%.1f",Hcsr04Read());
-    u8g2_SetFont(&u8g2,u8g2_font_fub14_tn);
-//    u8g2_ClearBuffer(&u8g2);
-    u8g2_DrawStr(&u8g2,60,32,distance);
-    u8g2_SetFont(&u8g2,u8g2_font_wqy16_t_gb2312);
-    u8g2_DrawGlyph(&u8g2,10,30,0x8ddd);
-    u8g2_DrawGlyph(&u8g2,40,30,0x79bb);
-    u8g2_SendBuffer(&u8g2);
-}
-void oled_speed()
-{
-    char *speed;
-    sprintf(speed,":%d",CarSpeedControl);
-    u8g2_SetFont(&u8g2,u8g2_font_fub14_tn);
-    u8g2_DrawStr(&u8g2,60,16,speed);
-    u8g2_SetFont(&u8g2,u8g2_font_wqy16_t_gb2312);
-    u8g2_DrawGlyph(&u8g2,10,14,0x901F);
-    u8g2_DrawGlyph(&u8g2,40,14,0x5ea6);
-    u8g2_SendBuffer(&u8g2);
-}
-
 void oled_key(char key[])
 {
     uint8_t PS2_KEY = 0, X1=0,Y1=0,X2=0,Y2=0;
@@ -50,7 +24,7 @@ void oled_key(char key[])
         case PSB_PAD_DOWN:	strcpy( key, "PSB_PAD_DOWN");  break;
         case PSB_PAD_LEFT:	strcpy( key, "PSB_PAD_LEF");  break;
         case PSB_L2:
-        {strcpy( key, "PSB_L2");    CarSpeedControl+=10;}break;
+        {strcpy( key, "PSB_L2"); }break;
         case PSB_R2:
         {strcpy( key, "PSB_R2");}  break;
         case PSB_L1:     strcpy( key, "PSB_L1");  break;
@@ -69,11 +43,12 @@ void oled_key(char key[])
 
 void oled_display()
 {
-    char distance[6],speed[4],key[20]="none";
+    char distance[6],speed[4],key[20]="none",target[4];
     Hcsr04Start();
     HAL_Delay(200);
     sprintf(distance,":%.1f",Hcsr04Read());
     sprintf(speed,":%d",CarSpeedControl);
+    sprintf(target,":%d",Get_TIM4_Speed());
     oled_key(key);
     u8g2_ClearBuffer(&u8g2);
     u8g2_SetFont(&u8g2,u8g2_font_wqy16_t_gb2312);
@@ -84,6 +59,6 @@ void oled_display()
     u8g2_DrawStr(&u8g2,10,50,key);
     u8g2_SetFont(&u8g2,u8g2_font_fub14_tn);
     u8g2_DrawStr(&u8g2,60,32,distance);
-    u8g2_DrawStr(&u8g2,60,16,speed);
+    u8g2_DrawStr(&u8g2,60,16,target);
     u8g2_SendBuffer(&u8g2);
 }
