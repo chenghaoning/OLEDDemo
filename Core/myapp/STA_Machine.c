@@ -16,7 +16,7 @@ static void Fun_STA5(void);
 //结构体定义    
 STA_Machine_t   STA_Machine = 
 {
-	STA1,
+	STA4,
 	
 	Fun_STA1,
 	Fun_STA2,
@@ -98,8 +98,6 @@ void Fun_STA4()
 void Fun_STA5()
 {
 
-
-    HAL_Delay(100);
 	//状态机切换至初始状态1
 //	STA_Machine.ucSTA_Machine_Status = STA1;
 }
