@@ -48,7 +48,7 @@ float PID_Compute_TIM1(float Setpoint1, float ADC_Buf1)
     error1_TIM1 = error0_TIM1;
 
     Motor_1_Drive(output1);
-
+    Motor_2_Drive(output1);
     return  output1;
 }
 
@@ -62,7 +62,7 @@ volatile float error0_TIM3, error1_TIM3, error2_TIM3;
 
 float PID_Compute_TIM3(float Setpoint3, float ADC_Buf3)  //Setpoint = Setspeed,ADC_Buf = Speedpa
 {
-    float PIout3 = 0;
+/*    float PIout3 = 0;
     float P_num=1.0,I_num=1.0;
 
     error0_TIM3 = Setpoint3 - ADC_Buf3;          //take this error     计算偏差
@@ -89,7 +89,36 @@ float PID_Compute_TIM3(float Setpoint3, float ADC_Buf3)  //Setpoint = Setspeed,A
 
     Motor_2_Drive(output3);
 
+    return  output3;*/
+    float PIout3 = 0;
+    float P_num=1.0,I_num=1.0;
+
+    error0_TIM3 = Setpoint3 - ADC_Buf3;          //take this error     计算偏差
+
+    PIout3 = kp*error0_TIM3*P_num - ki * error1_TIM3*I_num;
+
+    output3 += PIout3;
+
+    if(output3 > outMax) 		                   //limit output range
+    {
+        output3 = outMax;
+    }
+    else if(output3 < outMin)
+    {
+        output3 = outMin;
+    }
+    else
+    {
+        output3 = output3;
+    }
+
+    error2_TIM3 = error1_TIM3;		            //save this error offered the next one
+    error1_TIM3 = error0_TIM3;
+
+//    Motor_2_Drive(output3);
+
     return  output3;
+
 }
 
 
@@ -215,15 +244,10 @@ uint8_t Get_TIM5_Speed(void)
 
 //定时器2中断服务程序
 void speed_read_TimIcIsr(TIM_HandleTypeDef *htim)
-{
-    if (htim == (&htim6))
-    {
-        Get_TIM1_Speed();
+{       Get_TIM1_Speed();
         Get_TIM3_Speed();
         Get_TIM4_Speed();
         Get_TIM5_Speed();
-    }
-
 }
 
 

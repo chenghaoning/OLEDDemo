@@ -21,8 +21,8 @@
 //#define  RightMotor_Back()		{GPIO_ResetBits(Motor_Port, Right_MotoA_Pin); GPIO_SetBits(Motor_Port, Right_MotoB_Pin);}
 //#define  RightMotor_Stop()		{GPIO_ResetBits(Motor_Port, Right_MotoA_Pin); GPIO_ResetBits(Motor_Port, Right_MotoB_Pin);}
 
-#define  LeftMotorPWM(Speed)	Speed_FL=Speed; Speed_BL=Speed;
-#define  RightMotorPWM(Speed)   Speed_FR=Speed; Speed_BR=Speed;
+#define  LeftMotorPWM(Speed)	(Speed_FL=Speed, Speed_FR=Speed);
+#define  RightMotorPWM(Speed)   (Speed_BL=Speed, Speed_BR=-Speed);
 
 
 /**

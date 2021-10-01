@@ -65,7 +65,7 @@ uint8_t app_ps2_deal(void)
 
         }  break;
         case PSB_L1:     STA_Machine.ucSTA_Machine_Status = STA2; 	printf("PSB_L1 \n");  break;
-        case PSB_R1:     STA_Machine.ucSTA_Machine_Status = STA1; 	printf("PSB_R1 \n");  break;
+        case PSB_R1:     STA_Machine.ucSTA_Machine_Status = STA4; 	printf("PSB_R1 \n");  break;
         case PSB_TRIANGLE:	printf("PSB_TRIANGLE \n"); break; 							//灭火
         case PSB_CIRCLE:  	g_CarState = enRIGHT; printf("PSB_CIRCLE \n");  break;  	//舵机转
         case PSB_CROSS:     printf("PSB_CROSS \n");  break; 					//鸣笛
@@ -145,7 +145,7 @@ void app_CarstateOutput(void)
         case enDOWNLEFT:break;//左下转
         case enUPRIGHT:break;//右上转
         case enDOWNRIGHT:break;//右下转
-        default: Car_Stop(); break;
+        default: Car_Run(30); break;
     }
 
 }

@@ -55,15 +55,16 @@ static void pwm_set(uint32_t date,TIM_TypeDef* TIMx ,void(*Callback)(uint32_t,TI
 /* Public variables-----------------------------------------------------------*/
 
 /* Private function prototypes------------------------------------------------*/
-int _write (int fd, char *pBuffer, int size)
-{
-    for (int i = 0; i < size; i++)
-    {
-        while((USART1->SR&0X40)==0);
-        USART1->DR = (uint8_t) pBuffer[i];
-    }
-    return size;
+#if 1
+
+#include <stdio.h>
+//#include "main.h"
+int _write(int fd, char *ptr, int len) {
+//    HAL_USART_Transmit(&huart1, (uint8_t *) ptr, len, 0xFFFF);
+    return len;
 }
+
+#endif
 
 /********************************************************
   End Of File

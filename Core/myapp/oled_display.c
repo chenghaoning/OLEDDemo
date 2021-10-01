@@ -35,10 +35,6 @@ void oled_key(char key[])
         case PSB_SQUARE:  strcpy( key, "PSB_SQUARE");  break;  	//舵机转
         default: strcpy( key, "none"); break;
     }
-    u8g2_SetFont(&u8g2,u8g2_font_wqy16_t_chinese3);
-//    u8g2_ClearBuffer(&u8g2);
-    u8g2_DrawStr(&u8g2,10,50,key);
-    u8g2_SendBuffer(&u8g2);
 }
 
 void oled_display()
@@ -48,7 +44,7 @@ void oled_display()
     HAL_Delay(200);
     sprintf(distance,":%.1f",Hcsr04Read());
     sprintf(speed,":%d",CarSpeedControl);
-//    sprintf(target,":%d",Get_TIM4_Speed());
+    sprintf(target,":%d",__HAL_TIM_GetCounter(&htim4)-32768);
     oled_key(key);
     u8g2_ClearBuffer(&u8g2);
     u8g2_SetFont(&u8g2,u8g2_font_wqy16_t_gb2312);
@@ -59,6 +55,6 @@ void oled_display()
     u8g2_DrawStr(&u8g2,10,50,key);
     u8g2_SetFont(&u8g2,u8g2_font_fub14_tn);
     u8g2_DrawStr(&u8g2,60,32,distance);
-    u8g2_DrawStr(&u8g2,60,16,speed);
+    u8g2_DrawStr(&u8g2,60,16,target);
     u8g2_SendBuffer(&u8g2);
 }

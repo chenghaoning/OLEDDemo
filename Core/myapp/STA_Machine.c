@@ -16,7 +16,7 @@ static void Fun_STA5(void);
 //结构体定义    
 STA_Machine_t   STA_Machine = 
 {
-	STA4,
+	STA1,
 	
 	Fun_STA1,
 	Fun_STA2,
@@ -35,14 +35,8 @@ void Fun_STA1()
 {
     if (1)
     {
-
-        Speed_FR=3000;
-        Speed_BR=4000;
-        Speed_BL=3044;
-        Speed_BR=4000;
-        oled_display();
         app_CarstateOutput();
-//        Car_Run(100);
+        oled_display();
         //状态机切换至状态2
 //        STA_Machine.ucSTA_Machine_Status = STA2;
     }
@@ -66,6 +60,7 @@ void Fun_STA2()
     }
     else { Car_Run(CarSpeedControl); }
     oled_display();
+    if (PS2_DataKey()==PSB_R1){STA_Machine.ucSTA_Machine_Status = STA4;}
 }
 
 void Fun_STA3()
@@ -87,10 +82,11 @@ void Fun_STA3()
 
 void Fun_STA4()
 {
-    Car_Stop();
+//    Car_Stop();
     app_ps2_deal();
     app_CarstateOutput();
     oled_display();
+//    HAL_Delay(50);
 	//状态机切换至状态5
 //	STA_Machine.ucSTA_Machine_Status = STA1;
 }
