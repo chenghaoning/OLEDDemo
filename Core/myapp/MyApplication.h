@@ -5,6 +5,7 @@
 #include "gpio.h"
 #include "tim.h"
 #include "i2c.h"
+//#include "spi.h"
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"

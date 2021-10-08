@@ -13,8 +13,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
 
     if (htim == (&htim6))
     {
+
         speed_read_TimIcIsr(&htim);
     }
+    if (htim == (&htim7))
+    {
+
+    }
+
 }
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {

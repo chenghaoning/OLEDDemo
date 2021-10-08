@@ -1,6 +1,6 @@
 #include "..\myapp\MyApplication.h"
 
-volatile float kp = 5.0;
+volatile float kp = 10.0;
 volatile float ki = 1.0;
 
 #define outMax    7199
@@ -244,7 +244,9 @@ uint8_t Get_TIM5_Speed(void)
 
 //定时器2中断服务程序
 void speed_read_TimIcIsr(TIM_HandleTypeDef *htim)
-{       Get_TIM1_Speed();
+{
+
+        Get_TIM1_Speed();
         Get_TIM3_Speed();
         Get_TIM4_Speed();
         Get_TIM5_Speed();

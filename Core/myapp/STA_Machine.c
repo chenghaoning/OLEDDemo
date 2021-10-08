@@ -33,14 +33,14 @@ STA_Machine_t   STA_Machine =
 */
 void Fun_STA1()
 {
-    if (1)
-    {
-        app_CarstateOutput();
         oled_display();
+//    oled_distance();
+        app_CarstateOutput();
+//    Car_Run(100);
         //×´Ì¬»úÇÐ»»ÖÁ×´Ì¬2
 //        STA_Machine.ucSTA_Machine_Status = STA2;
-    }
 }
+
 
 void Fun_STA2()
 {
@@ -51,14 +51,14 @@ void Fun_STA2()
         if (Hcsr04Read() < 10)
         {
             Car_Stop();
-            HAL_Delay(50);
-            Car_Back(CarSpeedControl);
+            HAL_Delay(80);
+            Car_Back(80);
             HAL_Delay(1000);
             Car_Stop();
             STA_Machine.ucSTA_Machine_Status = STA3;
         }
     }
-    else { Car_Run(CarSpeedControl); }
+    else { Car_Run(80); }
     oled_display();
     if (PS2_DataKey()==PSB_R1){STA_Machine.ucSTA_Machine_Status = STA4;}
 }
@@ -82,11 +82,7 @@ void Fun_STA3()
 
 void Fun_STA4()
 {
-//    Car_Stop();
-    app_ps2_deal();
-    app_CarstateOutput();
-    oled_display();
-//    HAL_Delay(50);
+
 	//×´Ì¬»úÇÐ»»ÖÁ×´Ì¬5
 //	STA_Machine.ucSTA_Machine_Status = STA1;
 }

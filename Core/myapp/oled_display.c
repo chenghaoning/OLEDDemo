@@ -10,9 +10,7 @@ void oled_init(void )
 void oled_key(char key[])
 {
     uint8_t PS2_KEY = 0, X1=0,Y1=0,X2=0,Y2=0;
-//    __set_PRIMASK(1);  //关中断；
     PS2_KEY = app_ps2_deal();	 //手柄按键捕获处理
-//    __set_PRIMASK(0);//开中断
     switch(PS2_KEY)
     {
         case PSB_SELECT: 	strcpy( key, "PSB_SELECT");  break;
@@ -39,13 +37,11 @@ void oled_key(char key[])
 
 void oled_display()
 {
-    char distance[6],speed[4],key[20]="none",target[4];
-    Hcsr04Start();
-    HAL_Delay(200);
-    sprintf(distance,":%.1f",Hcsr04Read());
+    char speed[4],key[20]="none",target[4];
     sprintf(speed,":%d",CarSpeedControl);
     sprintf(target,":%d",__HAL_TIM_GetCounter(&htim4)-32768);
     oled_key(key);
+//    oled_display(distance);
     u8g2_ClearBuffer(&u8g2);
     u8g2_SetFont(&u8g2,u8g2_font_wqy16_t_gb2312);
     u8g2_DrawGlyph(&u8g2,10,14,0x901F);
@@ -54,7 +50,20 @@ void oled_display()
     u8g2_DrawGlyph(&u8g2,40,30,0x79bb);
     u8g2_DrawStr(&u8g2,10,50,key);
     u8g2_SetFont(&u8g2,u8g2_font_fub14_tn);
-    u8g2_DrawStr(&u8g2,60,32,distance);
-    u8g2_DrawStr(&u8g2,60,16,target);
+    u8g2_DrawStr(&u8g2,60,16,speed);
+//    u8g2_DrawStr(&u8g2,60,32,distance);
     u8g2_SendBuffer(&u8g2);
+}
+
+void oled_distance()
+{
+//    char temp="0";
+    char distance[5];
+    Hcsr04Start();
+    HAL_Delay(200);
+    sprintf(distance,":%.1f",Hcsr04Read());
+    u8g2_ClearBuffer(&u8g2);
+    u8g2_DrawStr(&u8g2,60,32,distance);
+    u8g2_SendBuffer(&u8g2);
+//    strcpy(distance,&temp);
 }

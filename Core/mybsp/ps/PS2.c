@@ -277,7 +277,7 @@ void PS2_TurnOnAnalogMode(void)
 	PS2_Cmd(0x44);
 	PS2_Cmd(0X00);
 	PS2_Cmd(0x01); 	//analog=0x01;digital=0x00  软件设置发送模式
-	PS2_Cmd(0x03);  //Ox03锁存设置，即不可通过按键“MODE”设置模式。
+	PS2_Cmd(0xEE);  //Ox03锁存设置，即不可通过按键“MODE”设置模式。
 									//0xEE不锁存软件设置，可通过按键“MODE”设置模式。
 	PS2_Cmd(0X00);
 	PS2_Cmd(0X00);

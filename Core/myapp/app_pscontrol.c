@@ -30,9 +30,9 @@ int CarSpeedControl = 100;
 uint8_t app_ps2_deal(void)
 {
     uint8_t PS2_KEY = 0, X1=0,Y1=0,X2=0,Y2=0;
-    __set_PRIMASK(1);  //关中断；
+
     PS2_KEY = PS2_DataKey();	 //手柄按键捕获处理
-    __set_PRIMASK(0);//开中断
+
     switch(PS2_KEY)
     {
         case PSB_SELECT: 	printf("PSB_SELECT \n");  break;
@@ -64,12 +64,12 @@ uint8_t app_ps2_deal(void)
             printf("PSB_R2 \n");
 
         }  break;
-        case PSB_L1:     STA_Machine.ucSTA_Machine_Status = STA2; 	printf("PSB_L1 \n");  break;
-        case PSB_R1:     STA_Machine.ucSTA_Machine_Status = STA4; 	printf("PSB_R1 \n");  break;
+//        case PSB_L1:     STA_Machine.ucSTA_Machine_Status = STA2; 	printf("PSB_L1 \n");  break;
+//        case PSB_R1:     STA_Machine.ucSTA_Machine_Status = STA1; 	printf("PSB_R1 \n");  break;
         case PSB_TRIANGLE:	printf("PSB_TRIANGLE \n"); break; 							//灭火
-        case PSB_CIRCLE:  	g_CarState = enRIGHT; printf("PSB_CIRCLE \n");  break;  	//舵机转
+        case PSB_CIRCLE:  	g_CarState = enTRIGHT; printf("PSB_CIRCLE \n");  break;  	//舵机转
         case PSB_CROSS:     printf("PSB_CROSS \n");  break; 					//鸣笛
-        case PSB_SQUARE:  	g_CarState = enLEFT; printf("PSB_SQUARE \n");  break;  	//舵机转
+        case PSB_SQUARE:  	g_CarState = enTLEFT; printf("PSB_SQUARE \n");  break;  	//舵机转
         default: g_CarState = enSTOP; break;
     }
     //获取模拟值
